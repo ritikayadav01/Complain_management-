@@ -32,18 +32,6 @@ A full-stack MERN (MongoDB, Express, React, Node.js) web application for managin
 - **Upload Resolution Images**: Attach images when resolving complaints
 - **Mark as Completed**: Resolve complaints with detailed resolution summary
 
-### AI Integration
-- **Auto-categorization**: Automatically categorize complaints based on description
-- **Auto-priority Assignment**: Assign priority levels (low/medium/high) using AI
-- **Auto-routing**: Route complaints to appropriate departments
-- **Resolution Summary**: Generate professional resolution summaries
-
-### Additional Features
-- **SLA System**: Automatic escalation for SLA violations
-- **Real-time Updates**: WebSocket-based real-time notifications and chat
-- **File Upload**: Support for images and videos in complaints
-- **Geolocation**: Capture and display complaint locations
-- **Role-based Access Control**: Secure access based on user roles
 
 ## 📁 Project Structure
 
@@ -100,7 +88,6 @@ smart_complaint_management/
 - **Socket.IO** - WebSocket server
 - **Multer** - File uploads
 - **Bcrypt** - Password hashing
-- **Node-cron** - Scheduled tasks
 
 ## 📦 Installation & Setup
 
@@ -121,31 +108,7 @@ smart_complaint_management/
    npm install
    ```
 
-3. **Create `.env` file**
-   ```bash
-   cp .env.example .env
-   ```
 
-4. **Configure environment variables**
-   ```env
-   PORT=5000
-   NODE_ENV=development
-   MONGODB_URI=mongodb://localhost:27017/smart_complaint_management
-   JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-   JWT_EXPIRE=7d
-   AI_API_KEY=your_openai_api_key_here
-   AI_API_URL=https://api.openai.com/v1/chat/completions
-   MAX_FILE_SIZE=10485760
-   UPLOAD_PATH=./uploads
-   FRONTEND_URL=http://localhost:5173
-   SLA_LOW_PRIORITY=72
-   SLA_MEDIUM_PRIORITY=48
-   SLA_HIGH_PRIORITY=24
-   
-   # Admin User Credentials (Auto-created on first server start)
-   ADMIN_EMAIL=admin@example.com
-   ADMIN_PASSWORD=admin123
-   ADMIN_NAME=System Administrator
    ```
 
 5. **Create uploads directory**
@@ -192,17 +155,8 @@ smart_complaint_management/
 
    The frontend will run on `http://localhost:5173`
 
-## 🔐 Default Users
-
-### Admin User (Auto-Created)
-The admin user is **automatically created** on first server start from environment variables:
-- **Email**: Set via `ADMIN_EMAIL` in `.env` (default: admin@example.com)
-- **Password**: Set via `ADMIN_PASSWORD` in `.env` (default: admin123)
-- **Role**: `admin` (immutable - cannot be changed)
-- **Creation**: Only via environment seeding, not through registration
 
 ⚠️ **Important**: 
-- Admin role cannot be created through `/api/auth/register`
 - Admin role cannot be changed or removed
 - Admin users cannot be deactivated or deleted
 - Only one admin user is created per `ADMIN_EMAIL`
@@ -483,21 +437,7 @@ Headers: Authorization: Bearer <token>
 
 ### Environment Variables for Production
 
-**Backend:**
-```env
-PORT=5000
-NODE_ENV=production
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
-JWT_SECRET=strong_random_secret_key
-JWT_EXPIRE=7d
-AI_API_KEY=your_openai_api_key
-AI_API_URL=https://api.openai.com/v1/chat/completions
-MAX_FILE_SIZE=10485760
-UPLOAD_PATH=./uploads
-FRONTEND_URL=https://your-frontend-domain.vercel.app
-SLA_LOW_PRIORITY=72
-SLA_MEDIUM_PRIORITY=48
-SLA_HIGH_PRIORITY=24
+
 ```
 
 **Frontend:**
@@ -508,20 +448,13 @@ VITE_SOCKET_URL=https://your-backend-domain.render.com
 
 ## 🔧 Configuration
 
-### SLA Configuration
-SLA deadlines are configured in hours:
-- Low Priority: 72 hours (3 days)
-- Medium Priority: 48 hours (2 days)
-- High Priority: 24 hours (1 day)
+
 
 ### File Upload Limits
 - Maximum file size: 10MB (configurable)
 - Allowed types: Images (jpeg, jpg, png, gif), PDFs, Videos (mp4, mov, avi)
 
-### AI Service Configuration
-The AI service uses OpenAI's API. You can:
-- Use OpenAI API (default)
-- Replace with other AI services by modifying `backend/services/ai.service.js`
+
 
 ## 🧪 Testing
 
