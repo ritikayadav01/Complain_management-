@@ -1,0 +1,21 @@
+{
+  "watch": [
+    "controllers",
+    "routes",
+    "models",
+    "services",
+    "middleware",
+    "cron",
+    "socket"
+  ],
+  "ext": "js,json",
+  "ignore": [
+    "uploads/*",
+    "node_modules/*"
+  ],
+  "delay": "1000",
+  "legacyWatch": true,
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
